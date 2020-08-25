@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.pages.home');
-});
 
+Route::get('/',     'LandingPageController@index')->name('index');
+Route::get('/shop', 'ShopController@index')->name('index');
+Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
