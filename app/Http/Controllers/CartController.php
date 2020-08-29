@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Product;
-class ShopController extends Controller
+use Illuminate\Http\Request;
+
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $products = Product::inRandomOrder()->take(9)->get();
-
-        return view('frontend.pages.shop',['products' => $products]);
+        $mightAlsoLike = Product::mightAlsoLike()->take(4)->get();
+        return view('frontend.pages.shopCart',['mightAlsoLike'=>$mightAlsoLike]);
     }
 
     /**
@@ -45,14 +44,9 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $products       = Product::where('slug', $slug)->firstOrFail();
-        $samilarProduct = Product::where('slug', '!=', $slug)->mightAlsoLike()->take(4)->get();
-        return view('frontend.pages.shopDetails',[
-            'products'          => $products,
-            'samilarProduct'    => $samilarProduct,
-        ]);
+        //
     }
 
     /**
