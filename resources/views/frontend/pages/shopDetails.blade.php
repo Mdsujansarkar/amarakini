@@ -62,7 +62,7 @@
                     <div class="breadcrumb__text">
                         <h2>Vegetable’s Package</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
+                            <a href="{{route('land.index')}}">Home</a>
                             <a href="./index.html">Vegetables</a>
                             <span>Vegetable’s Package</span>
                         </div>
@@ -81,17 +81,17 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="img/product/details/product-details-1.jpg" alt="">
+                                src="{{asset('fontend/img/product/details/product-details-1.jpg')}}" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                            <img data-imgbigurl="{{asset('fontend/img/product/details/product-details-1.jpg')}}"
                                 src="img/product/details/thumb-1.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-3.jpg"
-                                src="img/product/details/thumb-2.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-5.jpg"
-                                src="img/product/details/thumb-3.jpg" alt="">
-                            <img data-imgbigurl="img/product/details/product-details-4.jpg"
-                                src="img/product/details/thumb-4.jpg" alt="">
+                            <img data-imgbigurl="{{asset('fontend/img/product/details/product-details-1.jpg')}}"
+                                src="{{asset('fontend/img/product/details/product-details-1.jpg')}}" alt="">
+                            <img data-imgbigurl="{{asset('fontend/img/product/details/product-details-1.jpg')}}"
+                                src="{{asset('fontend/img/product/details/product-details-1.jpg')}}" alt="">
+                            <img data-imgbigurl="{{asset('fontend/img/product/details/product-details-1.jpg')}}"
+                                src="{{asset('fontend/img/product/details/product-details-1.jpg')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,14 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <form action="{{route('cart.store')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$products->id}}" />
+                        <input type="hidden" name="name" value="{{$products->name}}" />
+                        <input type="hidden" name="price" value="{{$products->price}}" />
+                        <button type="submit" class="primary-btn">ADD TO CARD</button>
+                        </form>
+                       
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Availability</b> <span>In Stock</span></li>

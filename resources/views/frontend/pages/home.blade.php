@@ -120,7 +120,7 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">{{$product->name}}</a></h6>
+                            <h6><a href="{{route('shop.show',$product->slug)}}">{{$product->name}}</a></h6>
                             <h5>{{$product->presentPrice()}}</h5>
                         </div>
                     </div>
