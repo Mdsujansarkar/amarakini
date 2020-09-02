@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Product;
-use Illuminate\Http\Request;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
-class CartController extends Controller
+use Illuminate\Http\Request;
+
+class CheckOutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        
-        $mightAlsoLike = Product::mightAlsoLike()->take(4)->get();
-        return view('frontend.pages.shopCart',['mightAlsoLike'=>$mightAlsoLike]);
+        //
     }
 
     /**
@@ -37,15 +34,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
-        });
-        if ($duplicates->isNotEmpty()) {
-            return redirect()->route('cart.index')->with('success_message', 'Item is already in your cart!');
-        }
-        Cart::add($request->id, $request->name, 1, $request->price)
-            ->associate('App\Product');
-            return redirect()->route('cart.index')->with('success_message','Item was add to your cart');
+        //
     }
 
     /**
@@ -90,21 +79,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        Cart::remove($id);
-        return back()->with('success_message','Remove Delete');
-    }
-     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function switchToSaveForLater($id)
-    {
-        $item = Cart::get($id);
-        Cart::remove($id);
-        Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)
-            ->associate('App\Product');
-            return redirect()->route('cart.index')->with('success_message','Item has been save later');
+        //
     }
 }

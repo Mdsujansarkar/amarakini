@@ -38,7 +38,7 @@
                 <h3>{{ Cart::count() }}item(s) in Shopping Cart</h3>
             </div>
         </div>
-         @foreach (Cart::content() as $item)
+        
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
@@ -50,9 +50,10 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th>Remove</th>
                                 </tr>
                             </thead>
+                             @foreach (Cart::content() as $item)
                             <tbody>
                                 <tr>
                                     <td class="shoping__cart__item">
@@ -73,17 +74,36 @@
                                         $110.00
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
+                                    <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit"><span class="text-danger"> <i class="fa fa-trash fa-1x"></i></span></button>
+                            </form>
+                                       
                                     </td>
                                 </tr>
                             </tbody>
+                              @endforeach
                         </table>
                     </div>
                 </div>
             </div>
-            @endforeach
+          
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                           <p>Have Code?<p>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your coupon code">
+                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6">
                     <div class="shoping__cart__btns">
                         <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                         <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
@@ -91,27 +111,22 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
-                        </div>
-                    </div>
+                   
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span>{{ presentPrice(Cart::subtotal()) }}</span></li>
+                            <li>Tax <span>{{ presentPrice(Cart::tax()) }}</span></li>
+                            <li>Total <span>{{ presentPrice(Cart::total()) }}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
+            @else
+            <h1>No items found</h1>
             @endif
         </div>
     </section>

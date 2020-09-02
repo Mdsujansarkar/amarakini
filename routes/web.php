@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get( '/',     			'LandingPageController@index' )				->name('land.index');
-Route::get( '/shop', 			'ShopController@index' )					->name('shop.index');
-Route::get( '/shop/{product}',  'ShopController@show' )						->name('shop.show');
+Route::get( '/',     			            'LandingPageController@index' )				->name('land.index');
+Route::get( '/shop', 			            'ShopController@index' )					->name('shop.index');
+Route::get( '/shop/{product}',              'ShopController@show' )						->name('shop.show');
 
-Route::get( '/cart',  			'CartController@index' )					->name('cart.index');
-Route::post( '/cart',  			'CartController@store' )					->name('cart.store');
+Route::get( '/cart',  			            'CartController@index' )					->name('cart.index');
+Route::post( '/cart',  			            'CartController@store' )					->name('cart.store');
+Route::delete( '/cart/{product}',  			'CartController@destroy' )					->name('cart.destroy');
+Route::post( '/cart/switchToSaveForLater/{product}', 'CartController@switchToSaveForLater' )->name('cart.switchToSaveForLater');
 Auth::routes();
 
-Route::get( '/home', 			'HomeController@index' )					->name('home');
+Route::get( '/home', 			            'HomeController@index' )					->name('home');
