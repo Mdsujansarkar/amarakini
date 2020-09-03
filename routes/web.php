@@ -22,6 +22,7 @@ Route::get( '/cart',  			            'CartController@index' )					->name('cart.i
 Route::post( '/cart',  			            'CartController@store' )					->name('cart.store');
 Route::delete( '/cart/{product}',  			'CartController@destroy' )					->name('cart.destroy');
 Route::post( '/cart/switchToSaveForLater/{product}', 'CartController@switchToSaveForLater' )->name('cart.switchToSaveForLater');
+Route::post( '/checkout', 'CheckOutController@switchToSaveForLater' )                   ->name('checkout.index');
 Auth::routes();
 
 Route::get( '/home', 			            'HomeController@index' )					->name('home');
