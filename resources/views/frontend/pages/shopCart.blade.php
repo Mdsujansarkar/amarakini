@@ -105,8 +105,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                        <a href="{{route('shop.index')}}" class="primary-btn site-btn">CONTINUE SHOPPING</a>
+                        <a href="#" class="primary-btn site-btn cart-btn-right"><span class="icon_loading"></span>
                             Upadate Cart</a>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                             <li>Tax <span>{{ presentPrice(Cart::tax()) }}</span></li>
                             <li>Total <span>{{ presentPrice(Cart::total()) }}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="{{route('checkout.index')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
@@ -132,4 +132,8 @@
     </section>
     <!-- Shoping Cart Section End -->
  @endsection
+   @section('extra-js')
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{asset('fontend/js/extra.js')}}"></script>
    
+   @endsection

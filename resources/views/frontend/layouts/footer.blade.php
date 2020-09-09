@@ -74,6 +74,7 @@
     <script src="{{asset('fontend/js/mixitup.min.js')}}"></script>
     <script src="{{asset('fontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('fontend/js/main.js')}}"></script>
+    @yield('extra-js')
 
 
 

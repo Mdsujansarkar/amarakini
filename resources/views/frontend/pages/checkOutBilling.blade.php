@@ -102,21 +102,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout__input">
-                                <p>Country<span>*</span></p>
-                                <input type="text">
-                            </div>
+                
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
                                 <input type="text" placeholder="Street Address" class="checkout__input__add">
-                                <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
                             </div>
                             <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
-                                <input type="text">
-                            </div>
-                            <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
                                 <input type="text">
                             </div>
                             <div class="checkout__input">
@@ -168,12 +160,15 @@
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                @foreach(Cart::content() as $item)
+                                    <li>{{ $item->model->name}} <span>{{$item->model->price}}</span></li>
+                                      @endforeach
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span>{{ presentPrice(Cart::subtotal())}}</span>
+                                </div>
+                                <div class="checkout__order__subtotal">Subtotal <span>{{ presentPrice(Cart::tax())}}</span>
+                                </div>
+                                <div class="checkout__order__total">Total <span>{{ presentPrice(Cart::total())}}</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -199,6 +194,8 @@
                                 </div>
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
+                      
+                            
                         </div>
                     </div>
                 </form>
